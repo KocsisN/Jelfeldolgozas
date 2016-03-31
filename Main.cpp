@@ -10,47 +10,37 @@ int main()
 {
 	std::vector<double> signal, time;
 	ifstream in("p.txt");
-	if (!in){
-		cout << "Baj" << endl;
-		return 0;
-	}
-	double dt0, dt1, dt = 0, val;
-	in >> dt0 >> dt1;
+	
+
+	double dt0, DT, dt = 0, val;
+	in >> dt0 >> DT;
 
 	while (in >> val){
 		signal.push_back(val);
 		time.push_back(dt);
-		dt += dt1;
+		dt += DT;
 	}
 	in.close();
-	cout << signal.size() << endl;
-	ofstream out("ki.txt");
-	/*vector<double> minima, maxima;
-	vector<int> minimaIndexes, maximaIndexes;
+
+	vector<double> minima, maxima, minimaIndexes, maximaIndexes;
 
 	Extrema e;
-	e.getExtremas(signal, maxima, maximaIndexes, minima, minimaIndexes);
+	e.getExtremas(signal, minima, minimaIndexes, maxima, maximaIndexes, DT);
 	
-	for (int i = 0; i < minimaIndexes.size(); ++i){
-		out << " " << minimaIndexes[i];
-	}
-	out << endl;
+	spline::spline3 s_minima;
+	s_minima.set_points(minimaIndexes, minima);
 
-	for (int i = 0; i < minimaIndexes.size(); ++i){
-		out << " " << minima[i];
+
+	spline::spline3 s_maxima;
+	s_maxima.set_points(maximaIndexes, maxima);
+
+	vector<double> interp1, interp2;
+	for (double &t : time){
+		interp1.push_back(s_minima(t));
+		interp2.push_back(s_maxima(t));
 	}
-	out << endl;
-	for (int i = 0; i < maximaIndexes.size(); ++i){
-		out << " " << maximaIndexes[i];
-	}
-	out << endl;
-	for (int i = 0; i < maximaIndexes.size(); ++i){
-		out << " " << maxima[i];
-	}*/
-	for (double &i : signal){
-		out << i << " ";
-	}
-	out.close();
+
+	e.printToFile("ki.txt", interp1, time, interp2, time);
 
 	//std::vector<double> X(5), Y(5);
 	//X[0] = 0.1; X[1] = 0.4; X[2] = 1.2; X[3] = 1.8; X[4] = 2.0;
