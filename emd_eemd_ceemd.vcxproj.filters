@@ -27,6 +27,9 @@
     <ClCompile Include="EMD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Extrema.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="spline3.h">
@@ -38,5 +41,13 @@
     <ClInclude Include="EMD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Extrema.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\p.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

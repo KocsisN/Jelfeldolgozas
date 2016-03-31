@@ -66,13 +66,18 @@
   <ItemGroup>
     <ClCompile Include="band_matrix.cpp" />
     <ClCompile Include="EMD.cpp" />
+    <ClCompile Include="Extrema.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="spline3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="band_matrix.h" />
     <ClInclude Include="EMD.h" />
+    <ClInclude Include="Extrema.h" />
     <ClInclude Include="spline3.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\p.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
