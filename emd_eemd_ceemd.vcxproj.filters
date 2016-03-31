@@ -24,12 +24,18 @@
     <ClCompile Include="band_matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EMD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="spline3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="band_matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EMD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
