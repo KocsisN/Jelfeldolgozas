@@ -26,12 +26,22 @@ void Extrema::getExtremas(vector<double> signal, vector<double> &maxima, vector<
 			maxima.push_back(signal[i]);
 			maximaIndexes.push_back(i*step);
 		}
+
+
 		//elozo es kovetkezo is nagyobb => minimum pont
 		if (signal[i + 1] > signal[i] && signal[i - 1] > signal[i]){
 			minima.push_back(signal[i]);
 			minimaIndexes.push_back(i*step);
 		}
 	}
+}
+
+int Extrema::numberOfZeroCross(vector<double> &signal){
+	return count_if(signal.begin(), signal.end(),
+		[](double el)
+	{
+		return (el < 0.0001 && el > 0.0001)
+	});
 }
 
 void Extrema::printToFile(string filename, vector<double> &minima, vector<double> &minimaIndexes,

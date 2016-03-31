@@ -4,6 +4,7 @@
 #include<vector>
 #include<iostream>
 #include<fstream>
+#include<algorithm>
 
 using namespace std;
 
@@ -14,7 +15,10 @@ public:
 	~Extrema();
 
 	void getExtremas(vector<double> signal, vector<double> &minima, vector<double> &minimaIndexes,
-		vector<double> &maxima, vector<double> &maximaIndexes, double step);
+		vector<double> &maxima, vector<double> &maximaIndexes, double step, bool only_minima = true,
+		bool onlymaxima = true, bool cout = true);
+	int numberOfZeroCross(vector<double> &signal);
+
 
 	void printToFile(string filename, vector<double> &minima, vector<double> &minimaIndexes,
 		vector<double> &maxima, vector<double> &maximaIndexes);
