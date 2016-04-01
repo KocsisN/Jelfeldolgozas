@@ -10,13 +10,17 @@ using namespace std;
 
 class Extrema
 {
+private:
+	double step;
+	
 public:
 	Extrema();
+	Extrema(double step);
 	~Extrema();
 
 	void getExtremas(vector<double> signal, vector<double> &minima, vector<double> &minimaIndexes,
-		vector<double> &maxima, vector<double> &maximaIndexes, double step, bool only_minima = true,
-		bool onlymaxima = true, bool cout = true);
+		vector<double> &maxima, vector<double> &maximaIndexes);
+
 	int numberOfZeroCross(vector<double> &signal);
 
 

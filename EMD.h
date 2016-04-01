@@ -15,12 +15,14 @@ class EMD
 private:
 	string inputFile, outputFile;
 	Extrema extrema;
-	bool isIMF(vector<double> &potentialIMF);
+	double step;
+	bool isIMF(vector<double> &potentialIMF, int numberOfExtremas, vector<double> &signalNew);
 public:
-	EMD(string inputFile = "input.txt", string outputFile="output.txt");
+	EMD(double step);
+	EMD(string inputFile = "input.txt", string outputFile="output.txt", double step = 0.00005);
 	~EMD();
 
-	void compute(vector<double> signal);
+	void compute(vector<double> &signal);
 };
 
 #endif

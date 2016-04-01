@@ -1,7 +1,10 @@
 #include "Extrema.h"
 
-
 Extrema::Extrema()
+{
+}
+
+Extrema::Extrema(double step) : step(step)
 {
 }
 
@@ -12,7 +15,7 @@ Extrema::~Extrema()
 
 //indexes: ha maximum pozitiv, ha minimum negativ
 void Extrema::getExtremas(vector<double> signal, vector<double> &maxima, vector<double> &maximaIndexes,
-												vector<double> &minima, vector<double> &minimaIndexes, double step)
+												vector<double> &minima, vector<double> &minimaIndexes)
 {
 	maxima.clear(); maximaIndexes.clear();
 	minima.clear(); minimaIndexes.clear();
@@ -40,7 +43,7 @@ int Extrema::numberOfZeroCross(vector<double> &signal){
 	return count_if(signal.begin(), signal.end(),
 		[](double el)
 	{
-		return (el < 0.0001 && el > 0.0001)
+		return (el < 0.0001 && el > -0.0001);
 	});
 }
 

@@ -1,8 +1,7 @@
 #include<iostream>
-#include "spline3.h"
 #include<vector>
 #include<fstream>
-#include"Extrema.h"
+#include"EMD.h"
 
 using namespace std;
 
@@ -21,10 +20,14 @@ int main()
 		dt += DT;
 	}
 	in.close();
+/*
+	vector<double> minima, maxima, minimaIndexes, maximaIndexes;*/
 
-	vector<double> minima, maxima, minimaIndexes, maximaIndexes;
+	EMD emd(DT);
 
-	Extrema e;
+	emd.compute(signal);
+
+	/*Extrema e;
 	e.getExtremas(signal, minima, minimaIndexes, maxima, maximaIndexes, DT);
 	
 	spline::spline3 s_minima;
@@ -38,9 +41,9 @@ int main()
 	for (double &t : time){
 		interp1.push_back(s_minima(t));
 		interp2.push_back(s_maxima(t));
-	}
+	}*/
 
-	e.printToFile("ki.txt", interp1, time, interp2, time);
+	//e.printToFile("ki.txt", interp1, time, interp2, time);
 
 	//std::vector<double> X(5), Y(5);
 	//X[0] = 0.1; X[1] = 0.4; X[2] = 1.2; X[3] = 1.8; X[4] = 2.0;
