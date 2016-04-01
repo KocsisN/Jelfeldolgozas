@@ -21,8 +21,6 @@ public:
 	void getExtremas(vector<double> signal, vector<double> &minima, vector<double> &minimaIndexes,
 		vector<double> &maxima, vector<double> &maximaIndexes);
 
-	int numberOfZeroCross(vector<double> &signal);
-
 
 	void printToFile(string filename, vector<double> &minima, vector<double> &minimaIndexes,
 		vector<double> &maxima, vector<double> &maximaIndexes);

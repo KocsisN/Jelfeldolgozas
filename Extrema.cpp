@@ -39,13 +39,6 @@ void Extrema::getExtremas(vector<double> signal, vector<double> &maxima, vector<
 	}
 }
 
-int Extrema::numberOfZeroCross(vector<double> &signal){
-	return count_if(signal.begin(), signal.end(),
-		[](double el)
-	{
-		return (el < 0.0001 && el > -0.0001);
-	});
-}
 
 void Extrema::printToFile(string filename, vector<double> &minima, vector<double> &minimaIndexes,
 	vector<double> &maxima, vector<double> &maximaIndexes)
