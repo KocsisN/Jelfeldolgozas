@@ -19,11 +19,15 @@ EMD::~EMD()
 bool EMD::isIMF(vector<double> &signal, int numberOfExtremas, vector<double> &mean)
 {
 	//how many zero crossings are
-	int zeroCrossing = count_if(signal.begin(), signal.end(), [](double el)
+	int zeroCrossing = 0;
+	for (int i = 1; i < signal.size(); ++i){
+		(signbit(signal[i]) != signbit(signal[i - 1])) ? ++zeroCrossing : zeroCrossing;
+	}
+	/*int zeroCrossing = count_if(signal.begin(), signal.end(), [](double el)
 	{
 		return (el < EPSFORZERO && el > -EPSFORZERO);
 	});
-
+*/
 	//az 2 uj nterploacio atlaga kell 0 legyen
 	int nonzeroPoints = count_if(mean.begin(), mean.end(), [](double val){
 		return (val < -EPSFORNONZERO || val > EPSFORNONZERO);
@@ -45,36 +49,52 @@ bool EMD::isIMF(vector<double> &signal, int numberOfExtremas, vector<double> &me
 
 void EMD::compute(vector<double> &signal)
 {
-	vector<double> minima, maxima, minimaIndex, maximaIndex;
-	vector<double> residue, mean, signalNew;
+	int nrofimf = 0;
+	int ss = signal.size();
+	vector<double> minima(ss), maxima(ss), minimaIndex(ss), maximaIndex(ss);
+	vector<double> residue(ss), mean(ss), signalNew(ss);
+	spline::spline3 s_minima, s_maxima;
+	bool DONE = false;
 	ofstream q("atlag.txt"); q << "";
 	q.close();
 	//while signal has more tha 2 extremas
 
-	do{
+	while(!DONE){
 		minima.clear(); maxima.clear();
 		minimaIndex.clear(); maximaIndex.clear();
-		residue.clear();
+		//residue.clear();
 		mean.clear(); signalNew.clear();
 
 		//find the first imf
 		signalNew = signal;
 		while (true){
 			//lebontjuk az elso tenyezot
-			extrema.getExtremas(signalNew, minima, minimaIndex, maxima, maximaIndex);
-			spline::spline3 s_minima, s_maxima;
+			mean.clear();
 
+			/***************************EXTREMAK*****************************/
+			extrema.getExtremas(signalNew, minima, minimaIndex, maxima, maximaIndex);
+
+
+			if (minima.size() + maxima.size() < 2){
+				DONE = true;
+				break;
+			}
+
+			/**************************INTERPOLACIO****************************/
 			s_minima.set_points(minimaIndex, minima);
 			s_maxima.set_points(maximaIndex, maxima);
 
+
+			/************************KIVONAS**********************************/
 			for (int i = 0; i < signalNew.size(); ++i){
 				mean.push_back((s_minima(i*step) + s_maxima(i*step)) / 2);
 				//az atlag izet kivonom a jelbol
-				residue.push_back(signalNew[i] - mean[i]);
+				residue[i] = (signalNew[i] - mean[i]);
 			}
 
 			//az uj izere ellenorziiuk, hogy imf-e
 			extrema.getExtremas(residue, minima, minimaIndex, maxima, maximaIndex);
+
 
 			s_minima.set_points(minimaIndex, minima);
 			s_maxima.set_points(maximaIndex, maxima);
@@ -88,24 +108,33 @@ void EMD::compute(vector<double> &signal)
 				ofstream o("atlag.txt", ios_base::app);
 				o << endl;
 				for (int i = 0; i < residue.size(); ++i){
+					o << residue[i] << " ";
 					signal[i] -= residue[i];
-					o << signal[i] << " ";
+					//o << signal[i] << " ";
 					//kivonjuk az imf-et az eredeti jelbol
 				}
 				o << endl;
-				for (auto &v : residue){
+				/*for (auto &v : residue){
 					o << v << " ";
 				}
 				o << endl;
-				o.close();
+				o.close();*/
+				++nrofimf;
 				break;
 			}
 			else
 			{
-				for (int i = signal.size(); i--;){
-					signalNew[i] = signal[i] - residue[i];
+				for (int i = 0; i < residue.size(); ++i){
+					signalNew[i] -= residue[i];
 				}
+				ofstream o("m.txt", ios_base::app);  o << endl;
+				for (auto &i : residue){
+					o << i << " ";
+				}
+				o << endl;
+				o.close();
 			}
 		}
-	} while (minima.size() + maxima.size() > 2);
+	}
+	cout << "Job's done: " << nrofimf << endl;
 }
