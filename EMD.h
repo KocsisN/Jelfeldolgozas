@@ -6,6 +6,7 @@
 #include<string>
 #include<vector>
 #include<cmath>
+#include<iostream>
 #include"spline3.h"
 #include"Extrema.h"
 

@@ -31,7 +31,9 @@ void spline3::set_points(const std::vector<double>& x,
 	const std::vector<double>& y)
 {
 	assert(x.size() == y.size());
-	assert(x.size()>2);
+	if (x.size() <= 2){
+		throw;
+	}
 	m_x = x;
 	m_y = y;
 	int   n = x.size();
