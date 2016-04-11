@@ -21,9 +21,9 @@ public:
 	void getExtremas(vector<double> signal, vector<double> &minima, vector<double> &minimaIndexes,
 		vector<double> &maxima, vector<double> &maximaIndexes);
 
-
+	/*
 	void printToFile(string filename, vector<double> &minima, vector<double> &minimaIndexes,
-		vector<double> &maxima, vector<double> &maximaIndexes);
+		vector<double> &maxima, vector<double> &maximaIndexes);*/
 };
 
 #endif

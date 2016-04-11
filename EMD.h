@@ -7,6 +7,7 @@
 #include<vector>
 #include<cmath>
 #include<iostream>
+#include<chrono>
 #include"spline3.h"
 #include"Extrema.h"
 
@@ -24,7 +25,7 @@ private:
 	bool isIMF(vector<double> &potentialIMF, int numberOfExtremas, vector<double> &signalNew);
 public:
 	EMD(double step);
-	EMD(string inputFile = "input.txt", string outputFile="output.txt", double step = 0.00005);
+	EMD(string inputFile = "input.txt", string outputFile = "output.txt");
 	~EMD();
 
 	void compute(vector<double> &signal);
