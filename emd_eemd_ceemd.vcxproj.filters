@@ -50,4 +50,12 @@
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="output.dat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="signal.dat">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

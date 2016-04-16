@@ -1,6 +1,6 @@
 #include "EMD.h"
 
-EMD::EMD(double step) : step(step)
+EMD::EMD(double step) : step(step), extrema(step)
 {
 
 }
@@ -50,6 +50,7 @@ void EMD::compute(vector<double> &signal)
 {
 
 	const size_t NROFELEMENTS = signal.size();
+	chrono::steady_clock::time_point totalBegin = std::chrono::steady_clock::now();
 
 	int nrofimf = 1;
 	int ss = signal.size();
@@ -65,7 +66,7 @@ void EMD::compute(vector<double> &signal)
 
 	ofstream o("output.dat");
 
-	//cout << "Jel kiirva" << endl;
+	cout << "Jel kiirva" << endl;
 	while (!DONE){
 		//minima.clear(); maxima.clear();
 		minimaIndex.clear(); maximaIndex.clear();
@@ -80,7 +81,7 @@ void EMD::compute(vector<double> &signal)
 			//mean.clear();
 
 			/***************************EXTREMAK*****************************/
-			extrema.getExtremas(signalNew, minima, minimaIndex, maxima, maximaIndex);
+			extrema.getExtremas(signalNew, minimaIndex, minima, maximaIndex, maxima);
 
 
 			if (minima.size() < 2 || maxima.size() < 2){
@@ -120,7 +121,7 @@ void EMD::compute(vector<double> &signal)
 			}
 			o.close();*/
 			//az uj izere ellenorziiuk, hogy imf-e
-			extrema.getExtremas(residue, minima, minimaIndex, maxima, maximaIndex);
+			extrema.getExtremas(residue, minimaIndex, minima, maximaIndex, maxima);
 
 			try{
 				s_minima.set_points(minimaIndex, minima);
@@ -174,8 +175,11 @@ void EMD::compute(vector<double> &signal)
 		}
 		cout << "\t\tThe " << nrofimf++ << ". imf found.\n";// cin.get();
 		chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-		cout << "Elapsed seconds: " << chrono::duration_cast<std::chrono::seconds>(end - begin).count() << endl;
+		cout << "Elapsed seconds: " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
 	}
+	chrono::steady_clock::time_point totalEnd = std::chrono::steady_clock::now();
+
+	cout << "Total Elapsed Milliseconds: " << chrono::duration_cast<std::chrono::milliseconds>(totalEnd - totalBegin).count() << endl;
 	o.close();
 	//cout << "Job's done: " << endl;
 }

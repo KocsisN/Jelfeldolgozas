@@ -2,6 +2,8 @@
 #define SPLINE3_H
 
 #include<vector>
+
+#include<iostream>
 #include"band_matrix.h"
 
 

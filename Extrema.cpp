@@ -12,8 +12,8 @@ Extrema::~Extrema()
 {
 }
 
-void Extrema::getExtremas(vector<double> signal, vector<double> &maxima, vector<double> &maximaIndexes,
-												vector<double> &minima, vector<double> &minimaIndexes)
+void Extrema::getExtremas(vector<double> signal, vector<double> &minimaIndexes, vector<double> &minima,
+												vector<double> &maximaIndexes, vector<double> &maxima)
 {
 	maxima.clear(); maximaIndexes.clear();
 	minima.clear(); minimaIndexes.clear();

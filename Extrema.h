@@ -18,8 +18,8 @@ public:
 	Extrema(double step);
 	~Extrema();
 
-	void getExtremas(vector<double> signal, vector<double> &minima, vector<double> &minimaIndexes,
-		vector<double> &maxima, vector<double> &maximaIndexes);
+	void getExtremas(vector<double> signal, vector<double> &minimaIndexes, vector<double> &minima,
+		vector<double> &maximaIndexes, vector<double> &maxima);
 
 	/*
 	void printToFile(string filename, vector<double> &minima, vector<double> &minimaIndexes,

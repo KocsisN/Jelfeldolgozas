@@ -1,5 +1,4 @@
 #include "spline3.h"
-
 using namespace spline;
 
 spline3::spline3() :	m_left(second_deriv), m_right(second_deriv),
@@ -27,8 +26,7 @@ void spline3::set_boundary(spline3::bd_type left, double left_value,
 }
 
 
-void spline3::set_points(const std::vector<double>& x,
-	const std::vector<double>& y)
+void spline3::set_points(const std::vector<double>& x, const std::vector<double>& y)
 {
 	assert(x.size() == y.size());
 	if (x.size() <= 2){
@@ -39,6 +37,7 @@ void spline3::set_points(const std::vector<double>& x,
 	int   n = x.size();
 	// TODO: maybe sort x and y, rather than returning an error
 	for (int i = 0; i<n - 1; i++) {
+		//std::cout << m_x[i] << " - " << m_x[i + 1]; std::cin.get();
 		assert(m_x[i]<m_x[i + 1]);
 	}
 
